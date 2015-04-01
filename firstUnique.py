@@ -17,9 +17,11 @@ test_cases.close()
 
 def firstUnique(line):
     count={}
+    # get count thru one traversal
     for c in line:
         count[c] = 1 + count.get(c,0)
 
+    # find first non repeating, worst case one traversal
     for c in line:
         if count[c] == 1:
             return c
