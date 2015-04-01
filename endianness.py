@@ -2,7 +2,7 @@
 import sys
 
 def main():
-    if sys.byteorder == "little":
+    if "little" == sys.byteorder:
         print "LittleEndian"
     else:
         print "BigEndian"
