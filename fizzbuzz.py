@@ -31,7 +31,7 @@ def fizzbuzz(f, b, lim):
 
 def main():
     # read file
-    lines = ""
+    lines = []
     with open(sys.argv[1]) as f:
         lines = f.readlines()
     #split line into three integers

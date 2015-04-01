@@ -28,12 +28,13 @@ def firstUnique(line):
 
 def main():
     # read file
-    lines = ""
+    lines = []
     with open(sys.argv[1]) as f:
         lines = f.readlines()
 
     for line in lines:
-        print first_unique(line)
+        if line: #ignore white space
+            print firstUnique(line)
 
 if __name__ == "__main__":
     main()
