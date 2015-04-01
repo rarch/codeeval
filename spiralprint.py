@@ -16,14 +16,17 @@ test_cases.close()
 """
 
 def rotCCW(grid):
+    # rotate counterclockwise by reversing the transpose
     return list(reversed(zip(*grid)))
 
 def clockwisein(grid):
+    # add first row, then recurse on rotation
     return list(grid[0]) + clockwisein(rotCCW(grid[1:])) if grid else []
 
-def doublelist(r,c,data):
+def doublelist(col,data):
     data = data.strip().split()
-    return [[data[i+j*r] for i in xrange(c)] for j in xrange(r)]
+    # return [[data[i+j*r] for i in xrange(c)] for j in xrange(r)]
+    return [data[ind:ind+col] for ind in xrange(0,len(data),col)]
 
 def main():
     # read file
@@ -32,11 +35,11 @@ def main():
         lines = f.readlines()
 
     for line in lines:
-        r,c,data=line.split(';')
-        # get dimensions
-        r,c = int(r), int(c)
+        _,c,data=line.split(';')
+        # get columns
+        col = int(c)
 
-        grid = doublelist(r,c,data)
+        grid = doublelist(col,data)
         print clockwisein(grid)
 
 if __name__ == "__main__":
