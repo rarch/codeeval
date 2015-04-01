@@ -40,7 +40,7 @@ def main():
         col = int(c)
 
         grid = doublelist(col,data)
-        print clockwisein(grid)
+        print " ".join(clockwisein(grid))
 
 if __name__ == "__main__":
     main()
