@@ -35,8 +35,8 @@ def main():
         lines = f.readlines()
 
     for line in lines:
-        getnums = lambda x: map(int,x.split(","))
-        setA,setB = map(getnums,line.strip().split(";"))
+        getNums = lambda x: map(int,x.split(","))
+        setA,setB = map(getNums,line.strip().split(";"))
 
         prettyPrint(intersection(setA,setB))
 
