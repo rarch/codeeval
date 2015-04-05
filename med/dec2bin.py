@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import sys
+
 """Sample code to read in test cases:
 
 import sys
@@ -13,10 +15,16 @@ for test in test_cases:
 test_cases.close()
 """
 
-import sys, os
-
 def main():
-    print os.path.getsize(sys.argv[1])
+    # read file
+    lines = []
+    with open(sys.argv[1]) as f:
+        lines = f.readlines()
+
+    binstr = lambda x: x >= 0 and bin(x)[2:] or "-" + bin(x)[3:]
+    for line in lines:
+        if line:
+            print binstr(int(line))
 
 if __name__ == "__main__":
     main()
