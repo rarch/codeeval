@@ -14,7 +14,8 @@ def fib(n):
 test_cases = open(sys.argv[1], 'r')
 for test in test_cases:
     # ignore test if it is an empty line
+    if test.strip():
     # 'test' represents the test case, do something with it
-    print fib(int(test))
+        print fib(int(test))
 
 test_cases.close()

@@ -21,10 +21,11 @@ def main():
         lines = f.readlines()
 
     for line in lines:
-        # split by commas
-        (n,bp1,bp2)=map(int,line.rstrip().split(","))
+        if line:
+            # split by commas
+            (n,bp1,bp2)=map(int,line.rstrip().split(","))
 
-        print str((1&(n>>(bp1-1))) == (1&(n>>(bp2-1)))).lower()
+            print str((1&(n>>(bp1-1))) == (1&(n>>(bp2-1)))).lower()
 
 if __name__ == "__main__":
     main()

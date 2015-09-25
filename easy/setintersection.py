@@ -35,10 +35,11 @@ def main():
         lines = f.readlines()
 
     for line in lines:
-        getNums = lambda x: map(int,x.split(","))
-        setA,setB = map(getNums,line.strip().split(";"))
+        if line:
+            getNums = lambda x: map(int,x.split(","))
+            setA,setB = map(getNums,line.strip().split(";"))
 
-        prettyPrint(intersection(setA,setB))
+            prettyPrint(intersection(setA,setB))
 
 if __name__ == "__main__":
     main()
