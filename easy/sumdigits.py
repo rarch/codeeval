@@ -8,5 +8,4 @@ for test in test_cases:
 
     print sum(map(int, test.strip()))
 
-
 test_cases.close()
