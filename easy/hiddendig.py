@@ -19,3 +19,5 @@ for test in test_cases:
                 result = result + chr(val-49)
 
     print result if result else 'NONE'
+
+test_cases.close()

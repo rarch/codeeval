@@ -21,3 +21,4 @@ for test in test_cases:
         if all('' == spl for spl in test.split(test[0:length])):
             print length
             break
+test_cases.close()
