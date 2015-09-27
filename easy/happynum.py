@@ -5,7 +5,7 @@ import sys
 def sumSqDigs(val):
     return sum(map(lambda c:int(c)**2, str(val)))
 
-def isHappy(val, lim=50):
+def isHappy(val):
     dct = {val:True}
 
     while True:
@@ -16,7 +16,6 @@ def isHappy(val, lim=50):
             return 0
         else:
             dct[val] = True
-
 
 test_cases = open(sys.argv[1], 'r')
 for test in test_cases:
