@@ -14,6 +14,6 @@ for test in test_cases:
     minute = int(60*(ang-deg))
     sec = int(3600*(ang-deg)-60*minute)
 
-    print str(deg)+'.'+str(minute)+'\''+str(sec)+'"'
+    print str(deg)+'.'+str(minute).zfill(2)+'\''+str(sec).zfill(2)+'"'
 
 test_cases.close()
