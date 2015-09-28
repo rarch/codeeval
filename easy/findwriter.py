@@ -11,7 +11,6 @@ for test in test_cases:
     chars,keystring = test.split('|')
     indices = map(int,keystring.strip().split())
 
-    res = ''.join(chars[index-1] for index in indices)
-    print res
-
+    print ''.join(chars[index-1] for index in indices)
+    
 test_cases.close()
