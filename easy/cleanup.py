@@ -3,7 +3,7 @@
 import sys
 from string import letters
 
-translate = dict(zip(letters,letters[0:26]*2))
+translate = dict(zip(letters,letters[:26]*2))
 
 test_cases = open(sys.argv[1], 'r')
 for test in test_cases:
