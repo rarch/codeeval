@@ -8,7 +8,14 @@ for test in test_cases:
     test = test.rstrip()
     if not test: continue
     # 'test' represents the test case, do something with it
-    words = test.split()
-    print ' '.join([word[-1]+word[1:-1:1]+word[0]for word in words])
+    data = test.split(':')
+    lst = map(int,data[0].strip().split())
+
+    swaps = map(lambda x:map(int,x.split('-')),map(lambda x:x.strip(),data[1].split(',')))
+    
+    for swap in swaps:
+        lst[swap[0]],lst[swap[1]] = lst[swap[1]],lst[swap[0]]
+
+    print ' '.join([str(val) for val in lst])
 
 test_cases.close()
