@@ -20,5 +20,4 @@ for test in test_cases:
     # 'test' represents the test case, do something with it
     print ' '.join(cycles(test.strip().split()))
     
-
 test_cases.close()
