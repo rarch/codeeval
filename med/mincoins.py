@@ -2,7 +2,7 @@
 
 import sys
 
-coins = [5,3,1]
+COINS = [5,3,1]
 
 test_cases = open(sys.argv[1], 'r')
 for test in test_cases:
@@ -12,7 +12,7 @@ for test in test_cases:
     val = int(test)
 
     count = 0
-    for coin in coins:
+    for coin in COINS:
         count,val = count+val/coin,val-coin*(val/coin)
     print count
 
