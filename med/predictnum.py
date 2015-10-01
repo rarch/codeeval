@@ -17,10 +17,8 @@ def predictVal2(val):
     return (1+predictVal(val-elt))%3
 
 def predictVal1(val): # WHY IS THIS NOT WORKING? #
-    if val==0:return 0
-    # elt is the largest power of 2 LE val
-    elt = int('1'+(len("{0:b}".format(val-1))-1)*'0',2)
-    return (1+predictVal1(val-elt))%3
+    if val<2:return val
+    return (1+predictVal1(int("{0:b}".format(val)[1:],2)))%3
 
 def predictVal(val):
     # is it that easy? IT IS THAT EASY
@@ -33,7 +31,6 @@ def main(filename):
 
     for line in lines:
         val = int(line)
-
         print predictVal(val)
         
 if __name__ == "__main__":
