@@ -7,6 +7,9 @@ def josephus(n,m):
 
     ind,count = 0,len(people)
     while people:
+        # modulus makes it circular
+        # add m-1 rather than m, because you're popping somebody off every time
+        #   therefor list is diminishing in size
         ind = (ind+m-1)%count
         res,count = res+[people.pop(ind)],count-1
 
