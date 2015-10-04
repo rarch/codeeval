@@ -9,7 +9,10 @@ def main(filename):
         lines = [line.strip() for line in f_in if line.rstrip()]
 
     for line in lines:
-        absent = [c for c in lowers if c not in line]
+        absent,line = [],line.lower()
+        for char in lowers:
+            if char not in line:
+                absent+=char
         print ''.join(absent) if absent else "NULL"
 
 if __name__ == "__main__":
