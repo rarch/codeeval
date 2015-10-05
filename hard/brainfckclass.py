@@ -1,18 +1,5 @@
 #!/usr/bin/env python
 
-# Yo!
-# Hello World!
-# 141201213012321312012321321321021321321321
-# 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89
-# 33e
-# 34b?
-# QSnOIP6sp1A
-# Just another brainfuck hacker
-# Hello World!
-# 0d7p
-# TNGUSGnfKQrp4
-# This is codeval.com
-
 import sys
 
 class BrainFuck:

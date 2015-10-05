@@ -18,6 +18,5 @@ def main(filename):
                 else: count+=1 # enters twice (a+b,b+a), so count once, and div/2
         print count/2
 
-
 if __name__ == "__main__":
     main(sys.argv[1])
