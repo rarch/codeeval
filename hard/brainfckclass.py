@@ -1,42 +1,54 @@
 #!/usr/bin/env python
 
-import sys
-
-# ONLY PARTIAL SOLUTION. WHAT IS WRONG WITH THIS?
-# IT PRINTS THE GIVEN TESTS PROPERLY!
-# +[--->++<]>+++.[->+++++++<]>.[--->+<]>----.
-# ++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.
 # Yo!
 # Hello World!
+# 141201213012321312012321321321021321321321
+# 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89
+# 33e
+# 34b?
+# QSnOIP6sp1A
+# Just another brainfuck hacker
+# Hello World!
+# 0d7p
+# TNGUSGnfKQrp4
+# This is codeval.com
+
+import sys
 
 class BrainFuck:
     import sys
     def __init__(self,code=''):
+        self.dataPtr=0
+        self.data=bytearray(b'\x00')
+        self.code=code
+        self.codePtr=0
         self.execDict={ '>':self.incDPtr, '<':self.decDPtr,
                         '+':self.incDVal, '-':self.decDVal,
                         '.':self.putC,    ',':self.getC,
                         '[':self.goRight, ']':self.goLeft  }
-        self.dataPtr=0
-        self.data=bytearray(b'\x00')
-        self.code=[c for c in code if c in self.execDict]
-        self.codePtr=0
-        # self.output=[]
-
+        self.mapping = {}
+        self.initJumpMap()
+    def initJumpMap(self):
+        temp=[]
+        for ind,char in enumerate(self.code):
+            if char=='[':
+                temp.append(ind)
+            if char==']':
+                start = temp.pop()
+                self.mapping[start],self.mapping[ind] = ind,start
     def run(self):
         while self.codePtr<len(self.code):
             self.execDict[self.code[self.codePtr]]()
             self.codePtr+=1
         sys.stdout.write(chr(10)) # print newline
-
     def incDPtr(self):
         self.dataPtr+=1
         if self.dataPtr==len(self.data):
-            self.data+=bytearray(b'\x00')
+            self.data.append(b'\x00')
     def decDPtr(self):
-        if self.dataPtr>0:
+        if self.dataPtr:
             self.dataPtr-=1
         else:
-            # self.dataPtr=len(self.data)-1
             self.data=bytearray(b'\x00')+self.data #expand left
     def incDVal(self):
         if self.data[self.dataPtr]<0xff:
@@ -49,28 +61,15 @@ class BrainFuck:
         else:
             self.data[self.dataPtr]=0xff
     def putC(self):
-        # sys.stdout.write(chr(self.data[self.dataPtr]))
-        self.output+=chr(self.data[self.dataPtr])
+        sys.stdout.write(chr(self.data[self.dataPtr]))
     def getC(self):
         self.data[self.dataPtr]=sys.stdin.read(1)
     def goRight(self):
         if self.data[self.dataPtr]==0x00:
-            depth=0
-            while 0<depth or self.code[self.codePtr]!=']':
-                self.codePtr+=1
-                if self.code[self.codePtr]=='[':
-                    depth+=1
-                if self.code[self.codePtr]==']':
-                    depth-=1
+            self.codePtr=self.mapping[self.codePtr]
     def goLeft(self):
-        if self.data[self.dataPtr]!=0:
-            depth=0
-            while 0<depth or self.code[self.codePtr]!='[':
-                self.codePtr-=1
-                if self.code[self.codePtr]==']':
-                    depth+=1
-                if self.code[self.codePtr]=='[':
-                    depth-=1
+        if self.data[self.dataPtr]:
+            self.codePtr=self.mapping[self.codePtr]
 
 def main(filename):
     lines=[]
@@ -78,12 +77,8 @@ def main(filename):
         lines=[line.strip() for line in f_in if line.rstrip()]
 
     for line in lines:
-        mybrain=BrainFuck(line)
+        mybrain=BrainFuck(filter(lambda x:x in "><+-.,[]",line))
         mybrain.run()
-        # print map(ord,mybrain.output)
-
-    # DEBUG
-    # raise Exception('\n'.join(lines))
 
 if __name__ == "__main__":
     main(sys.argv[1])
