@@ -18,7 +18,7 @@ def matching(keyC,txt):
         return ('B' not in txt) or ('1'==keyC and ('A' not in txt))
     return False
 
-def solve(row,p):
+def solve(row=0,p=0):
     global State,Key,Text,Key_len,Txt_len
     if State[-1][-1]: return # have valid soln
     if row==Key_len-1: # last elt in key, so solve
@@ -52,7 +52,7 @@ def main(filename):
 
         # Initialize State for dynamic solution
         State=[row[:] for row in [[False]*Txt_len]*Key_len]
-        solve(0,0)
+        solve()
 
         print call_It(State[-1][-1])
 
