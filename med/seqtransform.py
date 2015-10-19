@@ -18,22 +18,23 @@ def matching(keyC,txt):
         return ('B' not in txt) or ('1'==keyC and ('A' not in txt))
     return False
 
-def stepdown(row,p):
+def solve(row,p):
     global State,Key,Text,Key_len,Txt_len
     if State[-1][-1]: return # have valid soln
     if row==Key_len-1: # last elt in key, so solve
-        State[-1][-1]=matching(Key[row],Text[p+1:])
+        State[-1][-1]=matching(Key[row],Text[p:])
         return
     # step through, starting next symbol where last ended
-    for q in xrange(p+1,Txt_len-Key_len+row+1):
-        if not (State[row][q] or\
-            matching(Key[row],Text[p+1:q+1])): break
-        State[row][q]=True
-        stepdown(row+1,q)
+    for q in xrange(p,Txt_len-Key_len+row+1):
+        if not State[row][q]: # next is not true yet
+            # so increase substring until failure
+            if not matching(Key[row],Text[p:q+1]): break
+            State[row][q]=True
+            solve(row+1,q+1)
 
 def main(filename):
     global State,Key,Text,Key_len,Txt_len
-    call_It=lambda bln:"Yes" if bln else "No"
+    call_It=lambda cnd:"Yes" if cnd else "No"
 
     lines=[]
     with open(filename) as f_in: # get only nonempty lines
@@ -49,13 +50,9 @@ def main(filename):
         if Key_len==1: # length one, so solve
             print call_It(matching(Key,Text));continue
 
-        # Initialize State
+        # Initialize State for dynamic solution
         State=[row[:] for row in [[False]*Txt_len]*Key_len]
-
-        for q in xrange(Txt_len-Key_len+1):
-            if not matching(Key[0],Text[:q+1]): break
-            State[0][q]=True
-            stepdown(1,q)
+        solve(0,0)
 
         print call_It(State[-1][-1])
 
