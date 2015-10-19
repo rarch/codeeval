@@ -4,35 +4,19 @@ import sys
 
 Romans={'I':1,'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}
 
-def compute(components):
+def aromatic2int(numstr):
     global Romans
     res=0
 
-    # if last roman< this roman
-    #   subtract last
-    # else add it, and this is last
-
-    last=components.pop(0)
-    tempR=Romans[last[1]]
-
-    while components:
-        temp=components.pop(0)
-        lastR,tempR=tempR,Romans[temp[1]]
-        if lastR<tempR:
-            res-=lastR*last[0]
-        else:
-            res+=lastR*last[0]
-        last=temp
-        
-    lastR=tempR
-    res+=lastR*last[0]
+    lastC,lastR=int(numstr[0]),Romans[numstr[1]]
+    for ind in xrange(2,len(numstr),2):
+        tempC,tempR=int(numstr[ind]),Romans[numstr[ind+1]]
+        if lastR<tempR: res-=lastC*lastR
+        else: res+=lastC*lastR
+        lastC,lastR=tempC,tempR
+    res+=lastC*lastR
+    
     return res
-
-def aromatic(numstr):
-    components=[]
-    for ind in xrange(0,len(numstr),2):
-        components+=[(int(numstr[ind]),numstr[ind+1])]
-    return compute(components)
 
 def main(filename):
     lines=[]
@@ -40,7 +24,7 @@ def main(filename):
         lines = [line.strip() for line in f_in if line.rstrip()]
 
     for line in lines:
-        print aromatic(line)
+        print aromatic2int(line)
 
 if __name__ == "__main__":
     main(sys.argv[1])
