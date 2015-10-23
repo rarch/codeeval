@@ -2,7 +2,7 @@
 from __future__ import division
 import sys
 from operator import add,mul,sub,neg#,div
-OpsDict={'-':(sub,2,'l'),'+':(add,2,'l'),'^':(pow,4,'r'),'/':(lambda x,y:x/y,3,'l'),
+OpsDict={'-':(sub,2,'l'),'+':(add,2,'l'),'^':(pow,4,'r'),'/':(lambda x,y:x/y,3,'l'), # '/':(div:x/y,3,'l'),
             '*':(mul,3,'l'),'(':(None,9,'l'),')':(None,0,'l'),
             'u':(neg,5,'r')} # 'u' is for unary minus
 
@@ -19,6 +19,7 @@ class ExprTree:
                 (','+str(self.right) if self.right else '')+')'
                     if (self.left or self.right) else '')
     def literal(self):
+        """helper function to print code expression"""
         res='ExprTree('
         if self.cargo:
             if str==type(self.cargo):
@@ -116,7 +117,6 @@ def main(filename):
     for line in lines:
         print pprint(evalRPN(infix2postfix(parse(line))))
         # print pprint(RPN2tree(infix2postfix(parse(line))).my_eval())
-
 
 if __name__ == "__main__":
     main(sys.argv[1])
