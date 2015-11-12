@@ -19,6 +19,5 @@ end
 
 File.open(ARGV[0]).each_line do |line|
     x,y,n=line.split().map{|d|d.to_i}
-    # p x
     fizzbuzz(x,y,n)
 end
